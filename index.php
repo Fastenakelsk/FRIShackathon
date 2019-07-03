@@ -6,7 +6,7 @@
     <title>Fris</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-    <link href="toastr.css" rel="stylesheet"/>
+    <link href="main.css" rel="stylesheet"/>
 </head>
 <body>
 <!-- FORM -->
@@ -20,6 +20,7 @@
     <input type="submit" value="submit">
     <div id="notification"></div>
 </form>
+<div id="loader" class="loader hidden"></div>
 
 <!-- SCRIPTS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
@@ -31,12 +32,12 @@
         //Form auto sending via ajax
         $(document).on("submit", "form", function (e) {
             if($(this).attr("data-callback") != null) {
-                var form = $(this).get(0)
-                var formData = new FormData(form)
-
-                $url = $(this).attr("data-callback")
+                var form = $(this).get(0);
+                var formData = new FormData(form);
+                $url = $(this).attr("data-callback");
 
                 e.preventDefault();
+                document.getElementById('loader').classList.toggle('hidden');
 
                 $.ajax({
                     url: $url,
@@ -46,6 +47,7 @@
                     contentType: false,
                     complete: function (data) {
                         $("#notification").html(data.responseText); // .html pour réécrire par dessus
+                        document.getElementById('loader').classList.toggle('hidden');
                     }
                 });
             }

@@ -51,6 +51,7 @@
             $translatedWord = explode(',', $translatedWord['text'][0]);
             return $translatedWord;
         }
+        return [];
     }
 
     function getWordList($wordSearched) {
