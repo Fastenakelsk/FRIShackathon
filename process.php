@@ -29,10 +29,17 @@
                 } else if($langDetected == 'nl' || $search != $translatedWord2) {
                     $wordList = getWordList($translatedWord2);
                     $sentence = '';
+                    $nb = count($wordList);
+                    $i = 0;
                     foreach ($wordList as $word) {
-                        $sentence .= $word . ',';
+                        if($i < $nb-1) {
+                            $sentence .= $word . '%20,';
+                        } else {
+                            $sentence .= $word;
+                        }
+                        $i++;
                     }
-                    $globalList = translate('en', 'nl', $sentence);
+                    $globalList = array_unique(translate('en', 'nl', $sentence));
                 }
             }
         } else {
@@ -42,7 +49,7 @@
             ?>
             <script>
                 $('#synonymList').empty();
-                $('#synonymList').append('<li id="chosenWord" class="list-group-item active"> <?= $search ?></li>\n');
+                $('#synonymList').append('<li id="chosenWord" class="list-group-item active h4"> <?= $search ?></li>\n');
             </script>
             <?php
             foreach ($globalList as $item) {
@@ -59,7 +66,7 @@
     /* FUNCTIONS */
     function translate($langSrc, $langDest, $sentence) {
         $sentence = str_replace(' ', '%20', $sentence);
-        echo $sentence;
+
         $translatedWord = @file_get_contents('https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20190702T100837Z.54ebaca40a431057.041c6f0fdd9a0f60684236f098fce4272e0e12d4&text=' . $sentence . '&lang=' . $langSrc . '-' . $langDest);
 
         if($translatedWord) {

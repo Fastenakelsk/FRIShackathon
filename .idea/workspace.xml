@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="77ed38cc-8e55-480c-9c23-f44643f96226" name="Default Changelist" comment="" />
+    <list default="true" id="77ed38cc-8e55-480c-9c23-f44643f96226" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/process.php" beforeDir="false" afterPath="$PROJECT_DIR$/process.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -10,11 +13,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1751">
-              <caret line="79" column="85" selection-start-line="79" selection-start-column="85" selection-end-line="79" selection-end-column="85" />
+            <state relative-caret-position="437">
+              <caret line="30" column="53" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -28,11 +31,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/process.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="61" column="23" selection-start-line="61" selection-start-column="23" selection-end-line="61" selection-end-column="23" />
+            <state relative-caret-position="249">
+              <caret line="51" column="94" selection-start-line="51" selection-start-column="94" selection-end-line="51" selection-end-column="94" />
             </state>
           </provider>
         </entry>
@@ -48,10 +51,12 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>var</find>
       <find>$translatedWordList</find>
-      <find>echo</find>
       <find>bana</find>
+      <find>,</find>
+      <find>,'</find>
+      <find>var</find>
+      <find>echo</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -62,8 +67,8 @@
       <list>
         <option value="$PROJECT_DIR$/../fris/index.php" />
         <option value="$PROJECT_DIR$/main.css" />
-        <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/process.php" />
+        <option value="$PROJECT_DIR$/index.php" />
       </list>
     </option>
   </component>
@@ -127,12 +132,12 @@
       <workItem from="1562141409200" duration="726000" />
       <workItem from="1562142139367" duration="266000" />
       <workItem from="1562142490908" duration="4318000" />
-      <workItem from="1562147484071" duration="5692000" />
+      <workItem from="1562147484071" duration="6651000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27045000" />
+    <option name="totallyTimeSpent" value="28004000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -179,17 +184,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
+    <entry file="file://$PROJECT_DIR$/process.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1751">
-          <caret line="79" column="85" selection-start-line="79" selection-start-column="85" selection-end-line="79" selection-end-column="85" />
+        <state relative-caret-position="249">
+          <caret line="51" column="94" selection-start-line="51" selection-start-column="94" selection-end-line="51" selection-end-column="94" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/process.php">
+    <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="61" column="23" selection-start-line="61" selection-start-column="23" selection-end-line="61" selection-end-column="23" />
+        <state relative-caret-position="437">
+          <caret line="30" column="53" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
         </state>
       </provider>
     </entry>
