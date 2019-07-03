@@ -10,7 +10,7 @@
     </head>
     <body>
         <!-- FORM -->
-        <form action="" method="post" data-callback="http://localhost/htdocs/fris/process.php">
+        <form action="" method="post" data-callback="process.php">
             <label for="search">Search:</label>
             <input type="text" name="search" id="search" placeholder="Search..">
             <select name="lang">

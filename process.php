@@ -71,28 +71,61 @@
         }
     }*/
 
+    /* EXTERNAL RESOURCES */
     require_once './unirest-php/src/unirest.php';
 
-    $search = "banana";
-    Unirest\Request::verifyPeer(false);
-    $response = Unirest\Request::get("https://wordsapiv1.p.mashape.com/words/" . $search,
-        array(
-            "X-Mashape-Key" => "bdb41202abmsh5139c825d58c189p17ecd6jsne83d87c15e6a",
-            "Accept" => "application/json"
-        )
-    );
 
-    $wordList = [];
-    $words = json_decode($response->raw_body, true);
-    foreach ($words["results"][0]['synonyms'] as $word) {
-        array_push($wordList, $word);
+    /* MAIN CODE */
+    if(isset($_POST['search']) && !empty($_POST['search']) && isset($_POST['lang']) && !empty($_POST['lang'])) {
+        $search = str_replace(' ', '%20', htmlspecialchars($_POST['search']));
+        $langWebsite = htmlspecialchars($_POST['lang']);
+
+        if ($langWebsite == 'en') {
+            getWordList($search);
+        } else if ($langWebsite == 'nl') {
+            $translation = @file_get_contents('https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20190702T100837Z.54ebaca40a431057.041c6f0fdd9a0f60684236f098fce4272e0e12d4&text=' . $search . '&lang=en');
+            if($translation) {
+                $translation = json_decode($translation, true);
+                $langDetected = explode('-', $translation['lang'])[0];
+                if($langDetected == 'nl') {
+
+                }
+                else if($langDetected == 'en') {
+                    getWordList($search);
+                }
+            }
+        } else {
+            echo "Invalid language.";
+        }
     }
-    foreach ($words["results"][0]['typeOf'] as $word) {
-        array_push($wordList, $word);
+
+
+    /* FUNCTIONS */
+    function translateWord($langSrc, $langDest) {
+
     }
-    foreach ($words["results"][0]['hasTypes'] as $word) {
-        array_push($wordList, $word);
-    }
-    foreach ($wordList as $word) {
-        echo $word . '<br>';
+
+    function getWordList($wordSearched) {
+        Unirest\Request::verifyPeer(false);
+        $response = Unirest\Request::get("https://wordsapiv1.p.mashape.com/words/" . $wordSearched,
+            array(
+                "X-Mashape-Key" => "bdb41202abmsh5139c825d58c189p17ecd6jsne83d87c15e6a",
+                "Accept" => "application/json"
+            )
+        );
+
+        $wordList = [];
+        $words = json_decode($response->raw_body, true);
+        foreach ($words["results"][0]['synonyms'] as $word) {
+            array_push($wordList, $word);
+        }
+        foreach ($words["results"][0]['typeOf'] as $word) {
+            array_push($wordList, $word);
+        }
+        foreach ($words["results"][0]['hasTypes'] as $word) {
+            array_push($wordList, $word);
+        }
+        foreach ($wordList as $word) {
+            echo $word . '<br>';
+        }
     }
