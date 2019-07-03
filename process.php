@@ -59,10 +59,8 @@
     /* FUNCTIONS */
     function translate($langSrc, $langDest, $sentence) {
         $sentence = str_replace(' ', '%20', $sentence);
-        $translatedWord = @file_get_contents('https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20190702T100837Z.54ebaca40a431057.041c6f0fdd9a0f60684236f098fce4272e0e12d4&text=' . $sentence . '&lang=' . $langSrc . '-' . $langDest);
-
         echo $sentence;
-        echo $translatedWord;
+        $translatedWord = @file_get_contents('https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20190702T100837Z.54ebaca40a431057.041c6f0fdd9a0f60684236f098fce4272e0e12d4&text=' . $sentence . '&lang=' . $langSrc . '-' . $langDest);
 
         if($translatedWord) {
             $translatedWord = json_decode($translatedWord, true);
