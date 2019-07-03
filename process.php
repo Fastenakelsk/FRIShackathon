@@ -5,14 +5,12 @@
 
     /* MAIN CODE */
     if(isset($_POST['search']) && !empty($_POST['search']) && isset($_POST['lang']) && !empty($_POST['lang'])) {
+        $globalList = [];
         $search = str_replace(' ', '%20', htmlspecialchars($_POST['search']));
         $langWebsite = htmlspecialchars($_POST['lang']);
 
         if ($langWebsite == 'en') {
-            $wordList = getWordList($search);
-            foreach ($wordList as $word) {
-                echo $word . '<br>';
-            }
+            $globalList = getWordList($search);
         } else if ($langWebsite == 'nl') {
             $translatedWord = @file_get_contents('https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20190702T100837Z.54ebaca40a431057.041c6f0fdd9a0f60684236f098fce4272e0e12d4&text=' . $search . '&lang=en');
             if($translatedWord) {
@@ -36,14 +34,32 @@
                     foreach ($wordList as $word) {
                         $sentence .= $word . ',';
                     }
-                    $translatedWordList = translate('en', $langDetected, $sentence);
-                    foreach ($translatedWordList as $word) {
-                        echo $word . '<br>';
-                    }
+                    $globalList = translate('en', $langDetected, $sentence);
                 }
+<<<<<<< Updated upstream
+=======
+                else if($langDetected == 'en') {
+                    $globalList = getWordList($search);
+                }
+>>>>>>> Stashed changes
             }
         } else {
             echo "Invalid language.";
+        }
+        if(count($globalList) > 0){
+            ?>
+            <script>
+                $('#synonymList').empty();
+                $('#synonymList').append('<li id="chosenWord" class="list-group-item active"> <?= $search ?></li>\n');
+            </script>
+            <?php
+            foreach ($globalList as $item) {
+                ?>
+                <script>
+                    $('#synonymList').append('<li id="chosenWord" class="list-group-item"> <?= $item ?></li>\n');
+                </script>
+                <?php
+            }
         }
     }
 

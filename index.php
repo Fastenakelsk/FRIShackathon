@@ -7,9 +7,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <link href="main.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 <!-- FORM -->
+<div class="container col-12">
+    <form data-callback="process.php">
+        <div class="form-group col-2">
+            <input type="text" class="form-control" name="search" id="search" placeholder="Search..">
+        </div>
+        <div class="form-group col-3">
+            <select class="form-control" name="lang" id="exampleFormControlSelect1">
+                <option value="nl">Nederlands</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+        <div class="col-2">
+            <button type="submit" value="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+    <hr/>
+    <div id="loader" class="loader hidden"></div>
+    <div id="list" class="col-3">
+        <ul id="synonymList" class="list-group">
+
+        </ul>
+    </div>
+</div>
+
+<div id="notification"></div>
+<!--
 <form action="" method="post" data-callback="process.php">
     <label for="search">Search:</label>
     <input type="text" name="search" id="search" placeholder="Search..">
@@ -20,16 +47,17 @@
     <input type="submit" value="submit">
     <div id="notification"></div>
 </form>
-<div id="loader" class="loader hidden"></div>
+-->
 
 <!-- SCRIPTS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 <script>
+
+
     /* ------------------------------------------------------
                             FORM SENDING
     ------------------------------------------------------ */
     $(document).ready(function () {
-        //Form auto sending via ajax
         $(document).on("submit", "form", function (e) {
             if($(this).attr("data-callback") != null) {
                 var form = $(this).get(0);
@@ -38,6 +66,8 @@
 
                 e.preventDefault();
                 document.getElementById('loader').classList.toggle('hidden');
+                document.getElementById('list').classList.toggle('hidden');
+                $('#chosenWord').html(search.value);
 
                 $.ajax({
                     url: $url,
@@ -46,13 +76,17 @@
                     processData: false,
                     contentType: false,
                     complete: function (data) {
-                        $("#notification").html(data.responseText); // .html pour réécrire par dessus
+                        $("#notification").html(data.responseText);
                         document.getElementById('loader').classList.toggle('hidden');
+                        document.getElementById('list').classList.toggle('hidden');
                     }
                 });
             }
         });
     });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </body>
 </html>
