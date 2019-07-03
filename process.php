@@ -18,20 +18,26 @@
             if($translatedWord) {
                 $translatedWord = json_decode($translatedWord, true);
                 $langDetected = explode('-', $translatedWord['lang'])[0];
-                if($langDetected == 'nl') {
-                    $wordList = getWordList($translatedWord['text'][0]);
+                $translatedWord = $translatedWord['text'][0];
+
+                // Check
+                $translatedWord2 = @file_get_contents('https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20190702T100837Z.54ebaca40a431057.041c6f0fdd9a0f60684236f098fce4272e0e12d4&text=' . $search . '&lang=nl-en');
+                $translatedWord2 = json_decode($translatedWord2, true);
+                $translatedWord2 = $translatedWord2['text'][0];
+
+                if($langDetected == 'en' && $search == $translatedWord && $search == $translatedWord2) {
+                    $wordList = getWordList($search);
+                    foreach ($wordList as $word) {
+                        echo $word . '<br>';
+                    }
+                } else if($langDetected == 'nl' || $search != $translatedWord2) {
+                    $wordList = getWordList($translatedWord2);
                     $sentence = '';
                     foreach ($wordList as $word) {
                         $sentence .= $word . ',';
                     }
                     $translatedWordList = translate('en', $langDetected, $sentence);
                     foreach ($translatedWordList as $word) {
-                        echo $word . '<br>';
-                    }
-                }
-                else if($langDetected == 'en') {
-                    $wordList = getWordList($search);
-                    foreach ($wordList as $word) {
                         echo $word . '<br>';
                     }
                 }
@@ -55,6 +61,11 @@
     }
 
     function getWordList($wordSearched) {
+        if(strlen($wordSearched) > 3 && strpos($wordSearched, 'the ') !== false) {
+            $wordSearched = str_replace('the ', '', $wordSearched);
+        }
+        $wordSearched = str_replace(' ', '%20', $wordSearched);
+
         Unirest\Request::verifyPeer(false);
         $response = Unirest\Request::get("https://wordsapiv1.p.mashape.com/words/" . $wordSearched,
             array(
