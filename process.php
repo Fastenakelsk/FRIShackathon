@@ -4,9 +4,9 @@
 
 
     /* MAIN CODE */
-    if(isset($_POST['search']) && !empty($_POST['search']) && isset($_POST['lang']) && !empty($_POST['lang'])) {
+    if(isset($_POST['search']) && !empty($_POST['search'])) {
         $search = str_replace(' ', '%20', htmlspecialchars($_POST['search']));
-        $langWebsite = htmlspecialchars($_POST['lang']);
+        $langWebsite = 'en';
 
         if ($langWebsite == 'en') {
             $wordList = getWordList($search);

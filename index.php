@@ -9,48 +9,35 @@
         <link href="toastr.css" rel="stylesheet"/>
     </head>
     <body>
-        <!-- FORM -->
-        <form action="" method="post" data-callback="process.php">
+        <div id="form" data-callback="process.php">
             <label for="search">Search:</label>
             <input type="text" name="search" id="search" placeholder="Search..">
-            <select name="lang">
-                <option value="nl">Nederlands</option>
-                <option value="en">English</option>
-            </select>
-            <input type="submit" value="submit">
-            <div id="notification"></div>
-        </form>
+        </div>
 
+        <h4 style="margin-bottom: 5px">Result:</h4>
+        <span id="result"></span>
         <!-- SCRIPTS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
         <script>
-            /* ------------------------------------------------------
-                                    FORM SENDING
-            ------------------------------------------------------ */
-            $(document).ready(function () {
-                //Form auto sending via ajax
-                $(document).on("submit", "form", function (e) {
-                    if($(this).attr("data-callback") != null) {
-                        var form = $(this).get(0)
-                        var formData = new FormData(form)
+            search.oninput = function() {
+                if($("#form").attr("data-callback") != null) {
+                    var formData = new FormData();
+                    formData.append("search", search.value);
 
-                        $url = $(this).attr("data-callback")
+                    $url = $('#form').attr("data-callback");
 
-                        e.preventDefault();
-
-                        $.ajax({
-                            url: $url,
-                            type: "POST",
-                            data: formData,
-                            processData: false,
-                            contentType: false,
-                            complete: function (data) {
-                                $("#notification").html(data.responseText); // .html pour réécrire par dessus
-                            }
-                        });
-                    }
-                });
-            });
+                    $.ajax({
+                        url: $url,
+                        type: "POST",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        complete: function (data) {
+                            $("#result").html(data.responseText);
+                        }
+                    });
+                }
+            };
         </script>
     </body>
 </html>
