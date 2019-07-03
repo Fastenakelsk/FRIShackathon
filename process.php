@@ -1,76 +1,4 @@
 <?php
-    /*if(isset($_POST['search']) && !empty($_POST['search']) && isset($_POST['lang']) && !empty($_POST['lang'])) {
-        $search = str_replace(' ', '%20', htmlspecialchars($_POST['search']));
-        $langWebsite = htmlspecialchars($_POST['lang']);
-        if($langWebsite == 'en') {
-            getSynonyms($langWebsite, $search);
-        }
-        else if($langWebsite == 'nl') {
-            $translation = @file_get_contents('https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20190702T100837Z.54ebaca40a431057.041c6f0fdd9a0f60684236f098fce4272e0e12d4&text=' . $search . '&lang=en');
-            if($translation) {
-                $translation = json_decode($translation, true);
-                $langDetected = explode('-', $translation['lang'])[0];
-                if($langDetected == 'nl') {
-                    getSynonyms($langDetected, $translation['text'][0]);
-                }
-                else if($langDetected == 'en') {
-                    getSynonyms($langDetected, $search);
-                }
-            }
-            else {
-                echo "An error has occurred.";
-            }
-        }
-        else {
-            echo "An error has occurred.";
-        }
-    }
-
-    function getSynonyms($language, $word) {
-        $synonyms = @file_get_contents('http://thesaurus.altervista.org/thesaurus/v1?word=' . $word . '&language=en_US&output=json&key=1XAZ0WBuqhZIfhDy8k1r&callback=process');
-        if($synonyms) {
-            $synonyms = substr($synonyms, 8);
-            $synonyms = substr_replace($synonyms, "", -1);
-            $synonyms = json_decode($synonyms, true);
-
-            foreach ($synonyms['response'] as $list) {
-                $newList = explode('|', $list['list']['synonyms']);
-                if($language == 'en') {
-                    foreach ($newList as $synonym) {
-                        if(strpos($synonym, '(') != false) {
-                            $syn = substr($synonym,0,strrpos($synonym,'('));
-                        }
-                        else {
-                            $syn = $synonym;
-                        }
-                        echo $syn . '<br>';
-                    }
-                }
-                else if($language == 'nl') {
-                    $synonymsString = "";
-                    foreach ($newList as $synonym) {
-                        if (strpos($synonym, '(') != false) {
-                            $syn = substr($synonym, 0, strrpos($synonym, '('));
-                        } else {
-                            $syn = $synonym;
-                        }
-                        $synonymsString .= $syn . ',';
-                    }
-                    $synonymsString = str_replace(' ', '%20', htmlspecialchars($synonymsString));
-                    $translations = file_get_contents('https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20190702T100837Z.54ebaca40a431057.041c6f0fdd9a0f60684236f098fce4272e0e12d4&text=' . $synonymsString . '&lang=en');
-                    $translations = json_decode($translations, true);
-                    $translations = explode(',', $translations['text'][0]);
-                    foreach ($translations as $translation) {
-                        echo $translation . '<br>';
-                    }
-                }
-            }
-        }
-        else {
-            echo 'An error has occurred.';
-        }
-    }*/
-
     /* EXTERNAL RESOURCES */
     require_once './unirest-php/src/unirest.php';
 
@@ -81,17 +9,31 @@
         $langWebsite = htmlspecialchars($_POST['lang']);
 
         if ($langWebsite == 'en') {
-            getWordList($search);
+            $wordList = getWordList($search);
+            foreach ($wordList as $word) {
+                echo $word . '<br>';
+            }
         } else if ($langWebsite == 'nl') {
-            $translation = @file_get_contents('https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20190702T100837Z.54ebaca40a431057.041c6f0fdd9a0f60684236f098fce4272e0e12d4&text=' . $search . '&lang=en');
-            if($translation) {
-                $translation = json_decode($translation, true);
-                $langDetected = explode('-', $translation['lang'])[0];
+            $translatedWord = @file_get_contents('https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20190702T100837Z.54ebaca40a431057.041c6f0fdd9a0f60684236f098fce4272e0e12d4&text=' . $search . '&lang=en');
+            if($translatedWord) {
+                $translatedWord = json_decode($translatedWord, true);
+                $langDetected = explode('-', $translatedWord['lang'])[0];
                 if($langDetected == 'nl') {
-
+                    $wordList = getWordList($translatedWord['text'][0]);
+                    $sentence = '';
+                    foreach ($wordList as $word) {
+                        $sentence .= $word . ',';
+                    }
+                    $translatedWordList = translate('en', $langDetected, $sentence);
+                    foreach ($translatedWordList as $word) {
+                        echo $word . '<br>';
+                    }
                 }
                 else if($langDetected == 'en') {
-                    getWordList($search);
+                    $wordList = getWordList($search);
+                    foreach ($wordList as $word) {
+                        echo $word . '<br>';
+                    }
                 }
             }
         } else {
@@ -101,8 +43,14 @@
 
 
     /* FUNCTIONS */
-    function translateWord($langSrc, $langDest) {
-
+    function translate($langSrc, $langDest, $sentence) {
+        $sentence = str_replace(' ', '%20', $sentence);
+        $translatedWord = @file_get_contents('https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20190702T100837Z.54ebaca40a431057.041c6f0fdd9a0f60684236f098fce4272e0e12d4&text=' . $sentence . '&lang=' . $langSrc . '-' . $langDest);
+        if($translatedWord) {
+            $translatedWord = json_decode($translatedWord, true);
+            $translatedWord = explode(',', $translatedWord['text'][0]);
+            return $translatedWord;
+        }
     }
 
     function getWordList($wordSearched) {
@@ -116,16 +64,23 @@
 
         $wordList = [];
         $words = json_decode($response->raw_body, true);
-        foreach ($words["results"][0]['synonyms'] as $word) {
-            array_push($wordList, $word);
+        if(array_key_exists('results', $words)) {
+            $words = $words['results'][0];
+            if(array_key_exists('synonyms', $words)) {
+                foreach ($words['synonyms'] as $word) {
+                    array_push($wordList, $word);
+                }
+            }
+            if(array_key_exists('typeOf', $words)) {
+                foreach ($words['typeOf'] as $word) {
+                    array_push($wordList, $word);
+                }
+            }
+            if(array_key_exists('hasTypes', $words)) {
+                foreach ($words['hasTypes'] as $word) {
+                    array_push($wordList, $word);
+                }
+            }
         }
-        foreach ($words["results"][0]['typeOf'] as $word) {
-            array_push($wordList, $word);
-        }
-        foreach ($words["results"][0]['hasTypes'] as $word) {
-            array_push($wordList, $word);
-        }
-        foreach ($wordList as $word) {
-            echo $word . '<br>';
-        }
+        return $wordList;
     }
