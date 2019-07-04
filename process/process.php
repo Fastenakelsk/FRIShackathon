@@ -1,8 +1,15 @@
 <?php
     /* EXTERNAL RESOURCES */
     require_once '../unirest-php/src/unirest.php';
-    require_once '../class/Suggestion.php';
-    require_once '../manager/SuggestionManager.php';
+    // All classes & managers
+    spl_autoload_register(function($class) {
+        if(strpos($class, "Manager") !== false)
+            include __DIR__ . "../../manager/" . $class . ".php";
+        else
+            include __DIR__ . "../../class/" . $class . ".php";
+    });
+    ob_start();
+    session_start();
 
 
     /* MAIN CODE */
@@ -49,27 +56,12 @@
         } else {
             echo "Invalid language.";
         }
-        if(count($globalList) > 0){
-            ?>
-            <script>
-                $('#synonymList').empty();
-                $('#synonymList').append('<li id="chosenWord" class="list-group-item active h4"> <?= $search ?></li>\n');
-            </script>
-            <?php
-                foreach ($globalList as $suggestion) {
-                    ?>
-                    <script>
-                        $('#synonymList').append('<li class="list-group-item suggestion" data-callback="process/suggestion.php" title="<?= $suggestion->clicks ?>"><?= $suggestion->word ?></li>\n');
-                    </script>
-                    <?php
-                }
-            ?>
-                <script>
-                    selectionSuggestion();
-                </script>
-            <?php
-        }
+
+        $_SESSION['search'] = $search;
+        $_SESSION['suggestions'] = serialize($globalList);
+        header("Location: ../index.php");
     }
+    header('Location: ../index.php');
 
 
     /* FUNCTIONS */
