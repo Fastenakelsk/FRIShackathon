@@ -1,4 +1,4 @@
-function stackedBarChart(config){
+function barChart(config){
     var ctx = document.getElementById(config.canvasId);
 
     var myChart = new Chart(ctx, {
@@ -35,7 +35,13 @@ function stackedBarChart(config){
     },
     options: {
         scales: {
-        xAxes: [{ stacked: config.stacked }],
+        xAxes: [{ 
+            stacked: config.stacked,
+            scaleLabel: {
+                display: true,
+                labelString: config.xAxisLabel
+            }
+        }],
         yAxes: [{ 
             stacked: config.stacked,
             scaleLabel: {
