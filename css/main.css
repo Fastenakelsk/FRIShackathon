@@ -17,4 +17,8 @@
     display: none;
 }
 
+.suggestion:hover {
+    cursor: pointer;
+}
+
 

@@ -1,6 +1,6 @@
 <?php
     /* EXTERNAL RESOURCES */
-    require_once './unirest-php/src/unirest.php';
+    require_once '../unirest-php/src/unirest.php';
 
 
     /* MAIN CODE */
@@ -52,13 +52,18 @@
                 $('#synonymList').append('<li id="chosenWord" class="list-group-item active h4"> <?= $search ?></li>\n');
             </script>
             <?php
-            foreach ($globalList as $item) {
+            foreach ($globalList as $word) {
                 ?>
                 <script>
-                    $('#synonymList').append('<li id="chosenWord" class="list-group-item"> <?= $item ?></li>\n');
+                    $('#synonymList').append('<li class="list-group-item suggestion" data-callback="process/suggestion.php"><?= $word ?></li>\n');
                 </script>
                 <?php
             }
+            ?>
+                <script>
+                    selectionSuggestion();
+                </script>
+            <?php
         }
     }
 
@@ -113,3 +118,5 @@
         }
         return $wordList;
     }
+
+
