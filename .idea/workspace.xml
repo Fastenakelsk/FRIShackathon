@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="77ed38cc-8e55-480c-9c23-f44643f96226" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/class/Suggestion.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/Suggestion.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manager/SuggestionManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/manager/SuggestionManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process/process.php" beforeDir="false" afterPath="$PROJECT_DIR$/process/process.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process/suggestion.php" beforeDir="false" afterPath="$PROJECT_DIR$/process/suggestion.php" afterDir="false" />
-    </list>
+    <list default="true" id="77ed38cc-8e55-480c-9c23-f44643f96226" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,7 +223,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39446000" />
+    <option name="totallyTimeSpent" value="40045000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
