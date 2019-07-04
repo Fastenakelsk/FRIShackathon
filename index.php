@@ -11,27 +11,28 @@
 </head>
 <body>
 <!-- FORM -->
-<div class="container col-12">
-    <form data-callback="process.php">
-        <div class="form-group col-2">
-            <input type="text" class="form-control" name="search" id="search" placeholder="Search..">
-        </div>
-        <div class="form-group col-3">
-            <select class="form-control" name="lang" id="exampleFormControlSelect1">
-                <option value="nl">Nederlands</option>
-                <option value="en">English</option>
-            </select>
-        </div>
-        <div class="col-2">
-            <button type="submit" value="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </form>
+<div class="container col-12 my-5 text-center">
+    <div class="mx-auto col-3">
+        <form data-callback="process.php">
+            <div class="form-group">
+                <input type="text" class="form-control" name="search" id="search" placeholder="Search..">
+            </div>
+            <div class="form-group">
+                <select class="form-control" name="lang" id="exampleFormControlSelect1">
+                    <option value="nl">Nederlands</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+            <button type="submit" value="submit" class="btn btn-primary col-12">Submit</button>
+        </form>
+    </div>
     <hr/>
-    <div id="loader" class="loader hidden"></div>
-    <div id="list" class="col-3">
-        <ul id="synonymList" class="list-group">
-
-        </ul>
+    <div class="col-3 mx-auto">
+        <div id="loader" class="loader hidden mx-auto"></div>
+        <div id="list">
+            <ul id="synonymList" class="list-group">
+            </ul>
+        </div>
     </div>
 </div>
 
