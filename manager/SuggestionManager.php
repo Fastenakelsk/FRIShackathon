@@ -1,12 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: chris
- * Date: 04-07-19
- * Time: 13:12
- */
+
+require_once '../manager/DBManager.php';
 
 class SuggestionManager
 {
+    public static function isExistingSuggestion($suggestion) {
+        return DBManager::isExistingRecord('suggestions', 'word', $suggestion);
+    }
 
+    public static function getClicksOf($suggestion) {
+        return DBManager::getFieldValue('suggestions', 'clicks', 'word',$suggestion);
+    }
+
+    public static function getAllSuggestions() {
+        return DBManager::selectAll('SELECT * FROM suggestions', []);
+    }
 }

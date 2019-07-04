@@ -12,30 +12,55 @@
         }
 
         public static function select($request, $parameters) {
-            $res = self::connect()->prepare($request);
-            $check = $res->execute($parameters);
-            if($check)
-                return $res->rowCount() ? $res->fetchAll(PDO::FETCH_ASSOC) : false;
+            if(strpos($request, "SELECT") !== false) {
+                $res = self::connect()->prepare($request);
+                $check = $res->execute($parameters);
+                if($check)
+                    return $res->rowCount() ? $res->fetch(PDO::FETCH_ASSOC) : false;
+                else
+                    return false;
+            }
+            else
+                return false;
+        }
+
+        public static function selectAll($request, $parameters) {
+            if(strpos($request, "SELECT") !== false) {
+                $res = self::connect()->prepare($request);
+                $check = $res->execute($parameters);
+                if($check)
+                    return $res->rowCount() ? $res->fetchAll(PDO::FETCH_ASSOC) : false;
+                else
+                    return false;
+            }
             else
                 return false;
         }
 
         public static function insert($request, $parameters) {
-            return self::connect()->prepare($request)->execute($parameters) ? true : false;
+            if (strpos($request, "INSERT") !== false)
+                return self::connect()->prepare($request)->execute($parameters) ? true : false;
+            else
+                return false;
         }
 
         public static function update($request, $parameters) {
-            return self::connect()->prepare($request)->execute($parameters) ? true : false;
+            if(strpos($request, "UPDATE") !== false)
+                return self::connect()->prepare($request)->execute($parameters) ? true : false;
+            else
+                return false;
         }
 
         public static function delete($request, $parameters) {
-            return self::connect()->prepare($request)->execute($parameters) ? true : false;
+            if(strpos($request, "DELETE") !== false)
+                return self::connect()->prepare($request)->execute($parameters) ? true : false;
+            else
+                return false;
         }
 
         public static function nbRecords($table) {
-            $result = self::connect()->prepare("SELECT COUNT(*) as count FROM $table");
-            $result->execute();
-            return $result->fetch()['count'];
+            $nbRecords = self::connect()->prepare("SELECT COUNT(*) FROM $table");
+            return $nbRecords->execute();
         }
 
         public static function isExistingRecord($table, $field, $value) {
