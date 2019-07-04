@@ -15,12 +15,16 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <!-- Charts -->
+
+    <div class="container">
+        <a class="btn btn-info" href="index.php" role="button">Home</a>
+    </div>
     <div class="container">
         <div class="row">
-            <div class="col-sm">
+            <!--<div class="col-sm">
                 <canvas id="barChart"> </canvas>
-            </div>
-            <div class="col-sm">
+            </div>-->
+            <div class="col-12 col-md-8 mx-auto">
                 <canvas id="stackedBarChart"> </canvas>
             </div>
         </div>
@@ -50,11 +54,11 @@
 
     <script>
 
-    barChart('barChart');
+    //barChart('barChart');
     stackedBarChart('stackedBarChart', 'Elke instelling heeft zijn eigen specialisaties', ['KU Leuven', 'UAntwerpen', 'UGent', 'UHasselt', 'VUB'], 'bar', true, 'Aantal Projecten (%)');
 
     //BAR CHART
-    function barChart(elementId, title){
+    /*function barChart(elementId, title){
         var ctx = document.getElementById(elementId).getContext('2d');
 
         var myChart = new Chart(ctx, {
@@ -94,7 +98,7 @@
             }
         });
         $('#modalTitle').text(title);
-    }
+    }*/
 
 
     //STACKED BAR CHART
