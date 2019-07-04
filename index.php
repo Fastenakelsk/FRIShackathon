@@ -11,8 +11,12 @@
 </head>
 <body>
 <!-- FORM -->
+<div class="container">
+    <a class="btn btn-info" href="charts.html" role="button">Charts</a>
+</div>
 <div class="container col-12 my-5 text-center">
-    <div class="mx-auto col-3">
+
+    <div class="mx-auto col-12 col-md-3">
         <form data-callback="process.php">
             <div class="form-group">
                 <input type="text" class="form-control" name="search" id="search" placeholder="Search..">
@@ -27,7 +31,7 @@
         </form>
     </div>
     <hr/>
-    <div class="col-3 mx-auto">
+    <div class="col-12 col-md-3 mx-auto">
         <div id="loader" class="loader hidden mx-auto"></div>
         <div id="list">
             <ul id="synonymList" class="list-group">
