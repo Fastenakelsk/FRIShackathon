@@ -21,7 +21,7 @@
     </div>
     <div class="container">
         <div id="charts" class="row">
-            <div class="col-12 col-md-8 mx-auto">
+            <div class="col-12 col-md-8 m-0 p-0 mx-auto">
                 <canvas id="horizontalBarChart"> </canvas>
             </div>
             <div class="col-12 col-md-8 mx-auto">
@@ -34,19 +34,15 @@
     <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalTitle">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div id="modalBody" class="modal-body">
-                <canvas id="modalCanvas"></canvas>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="closeModal" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <!--<button type="button" class="btn btn-primary">Save changes</button>-->
-            </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="modalBody" class="modal-body">
+                    
+                </div>
             </div>
         </div>
     </div>
@@ -62,7 +58,9 @@
     type: 'bar',
     stacked: true,
     yAxisLabel: 'Aantal Projecten (%)',
+    yAxisTickValue: '%',
     xAxisLabel: '',
+    xAxisTickValue: '',
     titleId: '#modalTitle'
     };
     
@@ -73,7 +71,9 @@
     type: 'horizontalBar',
     stacked: false,
     yAxisLabel: '',
+    yAxisTickValue: '',
     xAxisLabel: 'Aantal Projecten (%)',
+    xAxisTickValue: '%',
     titleId: '#modalTitle'
     };
 
@@ -84,8 +84,18 @@
     $(document).ready(function(){
         
         $("#charts").click(function(e) {
+            
+            /*var item = document.getElementById('modalCanvas');
+            var context = item.getContext("2d");
+            context.clearRect(0, 0, item.width, item.height);*/
 
-            $('#modalCanvas').getContext('2d').clearRect(0, 0,  canvas.width, canvas.height);
+            //document.getElementById('modalBody').removeChild(document.getElementById('modalBody').firstChild)
+            while(document.getElementById('modalBody').firstChild){
+                document.getElementById('modalBody').removeChild(document.getElementById('modalBody').firstChild);
+            }
+            var g = document.createElement('canvas')
+            g.setAttribute('id', 'modalCanvas')
+            document.getElementById('modalBody').appendChild(g);
 
             switch(e.target.id){
                 case 'horizontalBarChart':

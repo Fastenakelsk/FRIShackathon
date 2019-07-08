@@ -36,6 +36,9 @@
     </head>
     <body>
         <!-- FORM -->
+        <div class="container">
+            <a class="btn btn-info" href="charts.html" role="button">Charts</a>
+        </div>  
         <div class="container col-12 my-5 text-center">
             <div class="mx-auto col-3">
                 <form action="process/process.php" method="post">
