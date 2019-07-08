@@ -1,0 +1,61 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <title>Word Clouds</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqcloud/1.0.4/jqcloud.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="container">
+            <a class="btn btn-info" href="index.php" role="button">Home</a>
+            <a class="btn btn-info" href="charts.html" role="button">Charts</a>
+    </div>
+
+    <div class="container">
+            <div id="wordclouds" class="row">
+                <div id="cloud" class="col-12 col-md-8 m-0 p-0 mx-auto">
+
+                </div>
+                <!-- <div class="col-12 col-md-8 mx-auto">
+                    <canvas id="stackedBarChart"> </canvas>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqcloud/1.0.4/jqcloud-1.0.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script>
+
+        $(document).ready(function(){
+            var words = [
+                {text: "Lorem", weight: 13},
+                {text: "Ipsum", weight: 10.5},
+                {text: "Dolor", weight: 9.4},
+                {text: "Sit", weight: 8},
+                {text: "Amet", weight: 6.2},
+                {text: "Consectetur", weight: 5},
+                {text: "Adipiscing", weight: 5},
+            ];
+
+            var options = {
+                classPattern: null,
+                colors: ["#800026", "#bd0026", "#e31a1c", "#fc4e2a", "#fd8d3c", "#feb24c", "#fed976", "#ffeda0", "#ffffcc"],
+                fontSize: { from: 1, to: 0.02 },
+                width: 500,
+                height: 350
+            };
+
+            $('#cloud').jQCloud(words, options);
+        });
+        
+    </script>
+</body>
+</html>
