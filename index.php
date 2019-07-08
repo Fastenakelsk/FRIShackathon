@@ -25,28 +25,6 @@
 
 <!DOCTYPE html>
 <html>
-<<<<<<< HEAD
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Fris</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-    <link href="main.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-<body>
-<!-- FORM -->
-<div class="container">
-    <a class="btn btn-info" href="charts.html" role="button">Charts</a>
-</div>
-<div class="container col-12 my-5 text-center">
-
-    <div class="mx-auto col-12 col-md-3">
-        <form data-callback="process.php">
-            <div class="form-group">
-                <input type="text" class="form-control" name="search" id="search" placeholder="Search..">
-=======
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -72,7 +50,6 @@
                     </div>
                     <button type="submit" value="submit" class="btn btn-primary col-12">Submit</button>
                 </form>
->>>>>>> 71f18c8ddbeaefb1058f62cff20a978c3355f0df
             </div>
             <hr/>
             <div class="col-3 mx-auto">
@@ -94,18 +71,6 @@
                     </ul>
                 </div>
             </div>
-<<<<<<< HEAD
-            <button type="submit" value="submit" class="btn btn-primary col-12">Submit</button>
-        </form>
-    </div>
-    <hr/>
-    <div class="col-12 col-md-3 mx-auto">
-        <div id="loader" class="loader hidden mx-auto"></div>
-        <div id="list">
-            <ul id="synonymList" class="list-group">
-            </ul>
-=======
->>>>>>> 71f18c8ddbeaefb1058f62cff20a978c3355f0df
         </div>
 
         <div id="callback"></div>

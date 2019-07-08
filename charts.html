@@ -85,9 +85,7 @@
         
         $("#charts").click(function(e) {
 
-            var canvas = document.getElementById('modalCanvas');
-            var ctx = canvas.getContext('2d');
-            ctx.clearRect(0, 0,  canvas.width, canvas.height);
+            $('#modalCanvas').getContext('2d').clearRect(0, 0,  canvas.width, canvas.height);
 
             switch(e.target.id){
                 case 'horizontalBarChart':
