@@ -10,11 +10,11 @@
     session_start();
 
     if(isset($_SESSION['search']) && !empty($_SESSION['search'])) {
-        $search = $_SESSION['search'];
+        $search = str_replace('%20', ' ', $_SESSION['search']);
         unset($_SESSION['search']);
     }
     if(isset($_SESSION['suggestion']) && !empty($_SESSION['suggestion'])) {
-        $search = $_SESSION['suggestion'];
+        $search = str_replace('%20', ' ', $_SESSION['suggestion']);
         unset($_SESSION['suggestion']);
     }
     if(isset($_SESSION['suggestions']) && !empty($_SESSION['suggestions'])) {
@@ -43,7 +43,7 @@
                         <input type="text" class="form-control" name="search" id="search" placeholder="Search.." value="<?php if(isset($search) && !empty($search)) echo $search; ?>">
                     </div>
                     <div class="form-group">
-                        <select class="form-control" name="lang" id="exampleFormControlSelect1">
+                        <select class="form-control" name="lang" id="lang">
                             <option value="nl">Nederlands</option>
                             <option value="en">English</option>
                         </select>
