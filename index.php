@@ -38,6 +38,7 @@
         <!-- FORM -->
         <div class="container">
             <a class="btn btn-info" href="charts.html" role="button">Charts</a>
+            <a class="btn btn-info" href="wordclouds.html" role="button">Word Clouds</a>
         </div>  
         <div class="container col-12 my-5 text-center">
             <div class="mx-auto col-3">
