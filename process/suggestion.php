@@ -19,4 +19,5 @@
         }
         $_SESSION['suggestion'] = $suggestion;
         $_SESSION['suggestions'] = serialize(SuggestionManager::getSuggestions($lang, $suggestion));
+        $_SESSION['lang'] = $lang;
     }

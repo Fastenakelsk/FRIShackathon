@@ -12,7 +12,6 @@
 
     /* MAIN CODE */
     if(isset($_POST['search']) && !empty($_POST['search']) && isset($_POST['lang']) && !empty($_POST['lang'])) {
-        $globalList = [];
         $search = str_replace(' ', '%20', htmlspecialchars($_POST['search']));
         $langWebsite = htmlspecialchars($_POST['lang']);
 
@@ -20,6 +19,7 @@
 
         $_SESSION['search'] = $search;
         $_SESSION['suggestions'] = serialize($globalList);
+        $_SESSION['lang'] = $langWebsite;
         header("Location: ../index.php");
     }
     header('Location: ../index.php');

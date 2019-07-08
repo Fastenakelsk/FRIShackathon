@@ -21,6 +21,13 @@
         $suggestions = unserialize($_SESSION['suggestions']);
         unset($_SESSION['suggestions']);
     }
+    if(isset($_SESSION['lang']) && !empty($_SESSION['lang'])) {
+        $lang = $_SESSION['lang'];
+        unset($_SESSION['lang']);
+    }
+    else {
+        $lang = 'nl';
+    }
 ?>
 
 <!DOCTYPE html>
@@ -44,8 +51,8 @@
                     </div>
                     <div class="form-group">
                         <select class="form-control" name="lang" id="lang">
-                            <option value="nl">Nederlands</option>
-                            <option value="en">English</option>
+                            <option value="nl" <?php if($lang == 'nl') echo 'selected'; ?>>Nederlands</option>
+                            <option value="en" <?php if($lang == 'en') echo 'selected'; ?>>English</option>
                         </select>
                     </div>
                     <button type="submit" value="submit" class="btn btn-primary col-12">Submit</button>
