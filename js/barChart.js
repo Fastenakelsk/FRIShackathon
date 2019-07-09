@@ -63,5 +63,6 @@ function barChart(config){
         }
     });
 
-    $(config.titleId).text(config.titleText);
+    //console.log(document.getElementById(config.titleId));
+    document.getElementById(config.titleId).textContent = config.titleText;
 }

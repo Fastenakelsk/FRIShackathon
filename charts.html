@@ -8,24 +8,16 @@
 </head>
 
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-    <!-- Charts -->
-
     <div class="container">
         <a class="btn btn-info" href="index.php" role="button">Home</a>
         <a class="btn btn-info" href="wordclouds.html" role="button">Word Clouds</a>
     </div>
     <div class="container">
-        <div id="charts" class="row">
-            <div class="col-12 col-md-8 m-0 p-0 mx-auto">
+        <div id="charts" class="row p-0 m-0">
+            <div class="col-12 col-md-8 p-0 m-0 mx-auto">
                 <canvas id="horizontalBarChart"> </canvas>
             </div>
-            <div class="col-12 col-md-8 mx-auto">
+            <div class="col-12 col-md-8 p-0 m-0 mx-auto">
                 <canvas id="stackedBarChart"> </canvas>
             </div>
         </div>
@@ -48,9 +40,17 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js" integrity="sha256-spTpc4lvj4dOkKjrGokIrHkJgNA0xMS98Pw9N7ir9oI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
     <script type="text/javascript" src="js/barChart.js"></script>
+    <script type="text/javascript" src="js/modal.js"></script>
 
     <script>
+
+
 
     stackedBarChartConfig = {
     canvasId: 'stackedBarChart',
@@ -62,7 +62,7 @@
     yAxisTickValue: '%',
     xAxisLabel: '',
     xAxisTickValue: '',
-    titleId: '#modalTitle'
+    titleId: 'modalTitle'
     };
     
     horizontalBarChartConfig = {
@@ -75,22 +75,19 @@
     yAxisTickValue: '',
     xAxisLabel: 'Aantal Projecten (%)',
     xAxisTickValue: '%',
-    titleId: '#modalTitle'
+    titleId: 'modalTitle'
     };
 
     barChart(stackedBarChartConfig);
     barChart(horizontalBarChartConfig);
 
+    document.addEventListener("DOMContentLoaded", function(){
+        var charts = document.getElementById('charts');
 
-    $(document).ready(function(){
-        
-        $("#charts").click(function(e) {
+        charts.addEventListener("click", loadModal);
+
+        function loadModal(e){
             
-            /*var item = document.getElementById('modalCanvas');
-            var context = item.getContext("2d");
-            context.clearRect(0, 0, item.width, item.height);*/
-
-            //document.getElementById('modalBody').removeChild(document.getElementById('modalBody').firstChild)
             while(document.getElementById('modalBody').firstChild){
                 document.getElementById('modalBody').removeChild(document.getElementById('modalBody').firstChild);
             }
@@ -107,15 +104,17 @@
                     stackedBarChartConfig.canvasId = 'modalCanvas';
                     barChart(stackedBarChartConfig);
                     break;
+                default:
+                    return;
             }
 
-            $('#modal').modal('show');            
-        });
-
+            // new modal instance
+            var myModal = new Modal({
+                el: document.getElementById('modal')
+            }).show();         
+        };
     });
                 
     </script>
-
-
 </body>
 </html>
