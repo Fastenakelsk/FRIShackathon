@@ -10,16 +10,23 @@
     session_start();
 
     if(isset($_SESSION['search']) && !empty($_SESSION['search'])) {
-        $search = $_SESSION['search'];
+        $search = str_replace('%20', ' ', $_SESSION['search']);
         unset($_SESSION['search']);
     }
     if(isset($_SESSION['suggestion']) && !empty($_SESSION['suggestion'])) {
-        $search = $_SESSION['suggestion'];
+        $search = str_replace('%20', ' ', $_SESSION['suggestion']);
         unset($_SESSION['suggestion']);
     }
     if(isset($_SESSION['suggestions']) && !empty($_SESSION['suggestions'])) {
         $suggestions = unserialize($_SESSION['suggestions']);
         unset($_SESSION['suggestions']);
+    }
+    if(isset($_SESSION['lang']) && !empty($_SESSION['lang'])) {
+        $lang = $_SESSION['lang'];
+        unset($_SESSION['lang']);
+    }
+    else {
+        $lang = 'nl';
     }
 ?>
 
@@ -47,9 +54,9 @@
                         <input type="text" class="form-control" name="search" id="search" placeholder="Search.." value="<?php if(isset($search) && !empty($search)) echo $search; ?>">
                     </div>
                     <div class="form-group">
-                        <select class="form-control" name="lang" id="exampleFormControlSelect1">
-                            <option value="nl">Nederlands</option>
-                            <option value="en">English</option>
+                        <select class="form-control" name="lang" id="lang">
+                            <option value="nl" <?php if($lang == 'nl') echo 'selected'; ?>>Nederlands</option>
+                            <option value="en" <?php if($lang == 'en') echo 'selected'; ?>>English</option>
                         </select>
                     </div>
                     <button type="submit" value="submit" class="btn btn-primary col-12">Submit</button>
